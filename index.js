@@ -50,7 +50,7 @@ if (interaction.commandName === 'setup-autorole') {
         .setTitle('🌌 JOIN THE UNIVERSE! 🌌')
         .setDescription('Ambil role Universers untuk membuka akses ke event, update, dan diskusi seru di server ini...')
         .setAuthor({ name: 'Universers', iconURL: interaction.guild.iconURL() })
-        .setImage('https://cdn.discordapp.com/attachments/1416162541578485811/1453033990473646251/Hitam_dan_Putih_Modern_Y2k_Streetwear_Tipografi_Logo_2.png...'); 
+        .setImage('https://cdn.discordapp.com/attachments/1416162541578485811/1453033990473646251/Hitam_dan_Putih_Modern_Y2k_Streetwear_Tipografi_Logo_2.png?ex=694bfadb&is=694aa95b&hm=a0ce3f341c11d4156a1f71df47842125e8dcc3c1b685376389ee18af20b98513&'); 
 
     const selectMenu = new StringSelectMenuBuilder()
         .setCustomId('select_autorole')

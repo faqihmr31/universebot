@@ -44,32 +44,34 @@ client.on('interactionCreate', async interaction => {
             await showAnnouncementModal(interaction);
         }
     }
-    if (interaction.commandName === 'setup-autorole') {
-            const embed = new EmbedBuilder()
-                .setColor(0x2B2D31)
-                .setTitle('🌌 JOIN THE UNIVERSE! 🌌')
-                .setDescription('Ambil role Universers untuk membuka akses ke event, update, dan diskusi seru di server ini. Jangan cuma jadi penonton, jadi bagian dari semestanya 🔥')
-                .setAuthor({ name: 'Universers', iconURL: interaction.guild.iconURL() })
-                // Ganti URL di bawah dengan link gambar kuda yang Anda inginkan
-                .setImage('https://cdn.discordapp.com/attachments/1416162541578485811/1453033990473646251/Hitam_dan_Putih_Modern_Y2k_Streetwear_Tipografi_Logo_2.png?ex=694bfadb&is=694aa95b&hm=a0ce3f341c11d4156a1f71df47842125e8dcc3c1b685376389ee18af20b98513&'); 
+if (interaction.commandName === 'setup-autorole') {
+    const embed = new EmbedBuilder()
+        .setColor(0x2B2D31)
+        .setTitle('🌌 JOIN THE UNIVERSE! 🌌')
+        .setDescription('Ambil role Universers untuk membuka akses ke event, update, dan diskusi seru di server ini...')
+        .setAuthor({ name: 'Universers', iconURL: interaction.guild.iconURL() })
+        .setImage('https://cdn.discordapp.com/attachments/1416162541578485811/1453033990473646251/Hitam_dan_Putih_Modern_Y2k_Streetwear_Tipografi_Logo_2.png...'); 
 
-            const selectMenu = new StringSelectMenuBuilder()
-                .setCustomId('select_autorole')
-                .setPlaceholder('Click menu ini untuk memilih roles!')
-                .addOptions([
-                    {
-                        label: 'Universers',
-                        value: 'role_universers',
-                        description: 'Dapatkan akses ke event, update, dan diskusi seru di server ini',
-                        emoji: '✨'
-                    }
-                ]);
+    const selectMenu = new StringSelectMenuBuilder()
+        .setCustomId('select_autorole')
+        .setPlaceholder('Click menu ini untuk memilih roles!')
+        .addOptions([
+            {
+                label: 'Universers',
+                value: 'role_universers',
+                description: 'Dapatkan akses ke event, update, dan diskusi seru di server ini',
+                emoji: '✨'
+            }
+        ]);
 
-            const row = new ActionRowBuilder().addComponents(selectMenu);
+    const row = new ActionRowBuilder().addComponents(selectMenu);
 
-            // Await di sini sekarang aman karena berada di dalam async interaction
-            await interaction.reply({ embeds: [embed], components: [row] });
-        }
+    // MENGIRIM PESAN SECARA MANDIRI KE CHANNEL (Tanpa jejak "used command")
+    await interaction.channel.send({ embeds: [embed], components: [row] });
+
+    // Memberikan respon tersembunyi agar command tidak dianggap gagal oleh Discord
+    await interaction.reply({ content: '✅ Pesan Auto-Role telah dikirim secara bersih!', ephemeral: true });
+}
 
     // --- HANDLER SELECT MENU ---
     if (interaction.isStringSelectMenu()) {

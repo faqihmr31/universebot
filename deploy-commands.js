@@ -3,7 +3,8 @@ const { REST, Routes, SlashCommandBuilder, PermissionFlagsBits } = require('disc
 
 const TOKEN = process.env.DISCORD_TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
-const GUILD_ID = process.env.GUILD_ID; 
+// TAMBAHKAN ID SERVER ANDA DI SINI (Dapatkan dengan klik kanan server -> Copy Server ID)
+const GUILD_ID = process.env.GUILD_ID;
 
 const commands = [
     new SlashCommandBuilder()
@@ -19,15 +20,15 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
 
 (async () => {
     try {
-        console.log('Menghapus semua global commands...');
-        
-        // Mengirim body kosong ke Routes.applicationCommands akan menghapus semua command global
-        await rest.put(
-            Routes.applicationCommands(CLIENT_ID),
-            { body: [] },
+        console.log(`Sedang mendaftarkan ${commands.length} application (/) commands ke GUILD...`);
+
+        // PERUBAHAN DI SINI: Menggunakan applicationGuildCommands agar instan
+        const data = await rest.put(
+            Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+            { body: commands },
         );
 
-        console.log('Sukses menghapus global commands.');
+        console.log(`Sukses mendaftarkan ${data.length} application (/) commands secara instan.`);
     } catch (error) {
         console.error(error);
     }
